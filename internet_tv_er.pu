@@ -1,0 +1,76 @@
+@startuml test
+title インターネットTV
+
+entity "放送情報" as broadcast{
+    + broadcast_id:int
+    --
+    ch_id:int
+    broadcast_start:datetime
+    broadcast_end:datetime
+    episode_id:int
+}
+
+
+
+entity "エピソードマスタ" as episode_master{
+    +episode_id:int
+    --
+    season_id:int
+    episode_name:string
+    episode_detail:string
+    episode_length:int
+    episode_release_date:datetime
+}
+
+entity "番組ジャンル関連" as show_genre {
+    + show_id : int
+    + genre_id : int
+}
+
+
+
+
+entity "チャンネルマスタ" as ch_master {
+    + ch_id : int
+    --
+    ch_name :string
+}
+entity "ジャンルマスタ" as genre_master{
+    +genre_id:int
+    --
+    genre_name:string
+}
+entity "番組マスタ" as show_master {
+    + show_id : int
+    --
+    show_name : string
+    show_detail : string  
+}
+
+entity "シーズンマスタ" as season_master {
+    +season_id:int
+    --
+    show_id:int
+}
+
+
+
+entity "視聴情報" as view_info {
+   +view_id:int
+   --
+   episode_id:int
+   view_cnt:int
+}
+
+episode_master --o{ broadcast
+episode_master||--o{ view_info
+season_master ||--o{ episode_master
+show_master||--o{season_master
+
+broadcast }o--|| ch_master
+
+
+
+show_master ||--|{ show_genre
+genre_master ||--o{ show_genre
+@enduml
