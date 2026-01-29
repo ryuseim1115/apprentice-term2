@@ -29,6 +29,7 @@ entity "シーズンマスタ" as season_master {
     + season_id : int
     --
     show_id : int
+    season_name : string
 }
 
 entity "エピソードマスタ" as episode_master{
