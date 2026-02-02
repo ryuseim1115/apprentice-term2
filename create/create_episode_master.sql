@@ -6,5 +6,6 @@ create table
         episode_detail VARCHAR(100) comment 'エピソード詳細',
         episode_length int comment 'エピソード時間',
         episode_release_date datetime comment 'エピソード公開日',
-        primary key (episode_id)
+        primary key (episode_id),
+        constraint fk_episode_master_season foreign key (season_id) references season_master (season_id) on delete cascade
     ) comment = 'エピソードマスタ';
