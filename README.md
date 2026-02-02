@@ -25,7 +25,7 @@ mysql_config_editor print --all
 ```powershell
 [term2]
 user = ユーザー名
-host = localhost
+password = *****
 ```
 ### 4. データベース作成・テーブル作成・データ挿入
 以下のコマンドを PowerShell で実行してください。
