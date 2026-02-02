@@ -1,1 +1,1 @@
-create database term2;
+create database __DB_NAME__;

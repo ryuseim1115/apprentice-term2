@@ -4,5 +4,5 @@ create table
         episode_id int not null comment 'エピソードID',
         view_cnt int not null comment '視聴数',
         primary key (view_id),
-        constraint view_info_view foreign key episode_id episode_master (episode_id) on delete cascade
+        constraint view_info_view foreign key (episode_id) references episode_master (episode_id) on delete cascade
     ) comment = '視聴情報';
