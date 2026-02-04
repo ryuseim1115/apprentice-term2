@@ -2,7 +2,6 @@ param(
     [string]$DbName ="term2"
 )
 
-
 (Get-Content create/create_database.sql) -replace "__DB_NAME__",$DbName | mysql --login-path=term2 --default-character-set=utf8mb4
 Write-Host 'Database setup completed'
 
@@ -31,5 +30,7 @@ Write-Host 'table:episode_master setup completed'
 Get-Content create/create_view_info.sql -Encoding utf8 | mysql --login-path=term2 --default-character-set=utf8mb4 $DbName
 Write-Host 'table:view_info setup completed'
 
+Get-Content insert/insert_show_master.sql -Encoding utf8 | mysql --login-path=term2 --default-character-set=utf8mb4 $DbName
+Write-Host 'table:view_info setup completed'
 
 Write-Host 'All setup completed'
