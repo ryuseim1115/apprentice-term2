@@ -82,7 +82,7 @@ show_master   ||--o{ season_master
 season_master||--o{ episode_master
 
 episode_master ||--o{ broadcast_ch
-time_master ||--o{ broadcast_ch
+time_master }|--o{ broadcast_ch
 ch_master ||--o{ broadcast_ch
 
 episode_master ||--o{ view_info

@@ -1,6 +1,7 @@
 **PowerShell（ps1）を使って MySQL のデータベース／テーブルを自動作成するツール**です。
 ### 1. PowerSellのバージョンが7であることを確認
 以下のコマンドをPowershellで実行して、PSVersionが7.××.××であることを確認して下さい。
+※PSVersionが7.××.××でないと文字化けする可能性があります。
 ```powershell
 $PSVersionTable
 ```
