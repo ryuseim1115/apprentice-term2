@@ -7,7 +7,7 @@ title インターネットTV
 entity "番組マスタ" as show_master {
     + show_id : int
     --
-    show_name : string
+    show_title : string
     show_detail : string  
 }
 
@@ -29,14 +29,15 @@ entity "シーズンマスタ" as season_master {
     + season_id : int
     --
     show_id : int
-    season_name : string
+    season_no : int
 }
 
 entity "エピソードマスタ" as episode_master{
     + episode_id : int
     --
     season_id : int
-    episode_name : string
+    episode_no : int
+    episode_title : string
     episode_detail : string
     episode_length : int
     episode_release_date : datetime
@@ -78,14 +79,14 @@ entity "視聴情報" as view_info {
 ' ====================
 ' リレーション
 ' ====================
-show_master   ||--o{ season_master
-season_master||--o{ episode_master
+show_master   ||--|{ season_master
+season_master||--|{ episode_master
 
 episode_master ||--o{ broadcast_ch
 time_master }|--o{ broadcast_ch
 ch_master ||--o{ broadcast_ch
 
-episode_master ||--o{ view_info
+episode_master ||--|{ view_info
 
 show_master ||--|{ show_genre
 genre_master ||--o{ show_genre
