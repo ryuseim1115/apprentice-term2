@@ -1,7 +1,7 @@
 -- エピソード視聴数トップ3のエピソードタイトルと視聴数を取得 
 select
-    e.episode_title,
-    v.view_cnt
+    e.episode_title as 'エピソードタイトル',
+    v.view_cnt as '視聴数'
 from
     episode_master e
     left join view_info v on v.episode_id = e.episode_id

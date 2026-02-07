@@ -3,7 +3,7 @@ select
     sh.show_title,
     se.season_no,
     ep.episode_no,
-    ep.episode_detail
+    vi.view_cnt
 from
     show_master sh
     left join season_master se on se.show_id = sh.show_id
