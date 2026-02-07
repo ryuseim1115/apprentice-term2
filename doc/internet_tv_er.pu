@@ -59,7 +59,7 @@ entity "チャンネルマスタ" as ch_master {
     ch_name : string
 }
 
-entity "時間チャンネル関連" as broadcast_ch{
+entity "時間チャンネル関連" as time_ch{
     + time_id : int
     + ch_id : int
     --
@@ -82,9 +82,9 @@ entity "視聴情報" as view_info {
 show_master   ||--|{ season_master
 season_master||--|{ episode_master
 
-episode_master ||--o{ broadcast_ch
-time_master }|--o{ broadcast_ch
-ch_master ||--o{ broadcast_ch
+episode_master ||--o{ time_ch
+time_master }|--o{ time_ch
+ch_master ||--o{ time_ch
 
 episode_master ||--|{ view_info
 
