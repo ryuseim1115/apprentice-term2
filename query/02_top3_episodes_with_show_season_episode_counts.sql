@@ -1,9 +1,9 @@
--- エピソード視聴数トップ3の番組タイトル、シーズン数、エピソード数、エピソードタイトル、視聴数を取得
 select
-    sh.show_title,
-    se.season_no,
-    ep.episode_no,
-    vi.view_cnt
+    sh.show_title as '番組タイトル',
+    se.season_no as 'シーズン数',
+    ep.episode_no as 'エピソード数',
+    ep.episode_title as 'エピソードタイトル',
+    vi.view_cnt as '視聴数'
 from
     show_master sh
     left join season_master se on se.show_id = sh.show_id

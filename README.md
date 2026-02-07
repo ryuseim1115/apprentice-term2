@@ -38,3 +38,5 @@ password = *****
 ```powershell
 .\main.ps1
 ```
+### 6. クエリ
+課題のクエリは、queryフォルダに格納しています。

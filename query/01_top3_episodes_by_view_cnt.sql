@@ -1,4 +1,3 @@
--- エピソード視聴数トップ3のエピソードタイトルと視聴数を取得 
 select
     e.episode_title as 'エピソードタイトル',
     v.view_cnt as '視聴数'
