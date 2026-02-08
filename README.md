@@ -36,7 +36,15 @@ password = *****
 ### 5. データベース作成・テーブル作成・データ挿入
 以下のコマンドを PowerShell で実行してください。
 ```powershell
-.\main.ps1
+.\scripts\main.ps1
 ```
-### 6. クエリ
-課題のクエリは、queryフォルダに格納しています。
+### 6. ディレクトリ構成
+```text
+TERM2/
+├ sql/
+│  ├ ddl/    # テーブル定義（CREATE TABLE）
+│  ├ dml/    # 初期データ投入（INSERT）
+│  └ query/  # 課題
+├ scripts/   # PowerShell実行スクリプト
+├ doc/       # ER図・設計メモ
+└ README.md
