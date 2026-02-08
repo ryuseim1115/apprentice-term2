@@ -1,49 +1,80 @@
 select
-    show_title_avg.genre_name as 'ジャンル名',
-    show_title_avg.show_title as '番組タイトル',
-    show_title_avg.avg_view_cnt as 'エピソード平均視聴数'
+    genre_view_info.genre_name as 'ジャンル名',
+    show_view_info.show_title as '番組タイトル',
+    genre_view_info.max_genre_view_cnt as 'エピソード平均視聴数'
 from
     (
         select
-            show_title.genre_id,
-            max(show_title.avg_view_cnt) as max_view_cnt
+            ge.genre_id,
+            ge.genre_name,
+            max(show_view_info.avg_show_view_cnt) as max_genre_view_cnt
+        from
+            genre_master as ge
+            left join show_genre as sg on sg.genre_id = ge.genre_id
+            left join show_master as sh on sh.show_id = sg.show_id
+            left join (
+                select
+                    show_view_info.show_id,
+                    show_view_info.avg_show_view_cnt
+                from
+                    (
+                        select
+                            sh.show_id,
+                            avg(episode_view_info.view_cnt) as avg_show_view_cnt
+                        from
+                            show_master as sh
+                            left join season_master as se on se.show_id = sh.show_id
+                            left join episode_master as ep on ep.season_id = se.season_id
+                            left join (
+                                select
+                                    ep.episode_id,
+                                    sum(vi.view_cnt) as view_cnt
+                                from
+                                    episode_master as ep
+                                    left join broadcast as br on br.episode_id = ep.episode_id
+                                    left join view_info as vi on vi.broadcast_id = br.broadcast_id
+                                group by
+                                    ep.episode_id
+                            ) episode_view_info on episode_view_info.episode_id = ep.episode_id
+                        group by
+                            sh.show_id
+                    ) show_view_info
+            ) show_view_info on show_view_info.show_id = sh.show_id
+        group by
+            ge.genre_id,
+            ge.genre_name
+    ) genre_view_info
+    left join show_genre as sg on sg.genre_id = genre_view_info.genre_id
+    left join show_master as sh on sh.show_id = sg.show_id
+    inner join (
+        select
+            show_view_info.show_id,
+            show_view_info.show_title,
+            show_view_info.avg_show_view_cnt
         from
             (
                 select
-                    shg.genre_id,
-                    avg(vi.view_cnt) as avg_view_cnt
+                    sh.show_id,
+                    sh.show_title,
+                    avg(episode_view_info.view_cnt) as avg_show_view_cnt
                 from
                     show_master as sh
                     left join season_master as se on se.show_id = sh.show_id
                     left join episode_master as ep on ep.season_id = se.season_id
-                    left join view_info as vi on vi.episode_id = ep.episode_id
-                    left join show_genre as shg on shg.show_id = sh.show_id
+                    left join (
+                        select
+                            ep.episode_id,
+                            sum(vi.view_cnt) as view_cnt
+                        from
+                            episode_master as ep
+                            left join broadcast as br on br.episode_id = ep.episode_id
+                            left join view_info as vi on vi.broadcast_id = br.broadcast_id
+                        group by
+                            ep.episode_id
+                    ) episode_view_info on episode_view_info.episode_id = ep.episode_id
                 group by
                     sh.show_id,
-                    shg.genre_id
-            ) show_title
-        group by
-            show_title.genre_id
-    ) show_title_max
-    left join (
-        select
-            sh.show_title,
-            shg.genre_id,
-            gm.genre_name,
-            avg(vi.view_cnt) as avg_view_cnt
-        from
-            show_master as sh
-            left join season_master as se on se.show_id = sh.show_id
-            left join episode_master as ep on ep.season_id = se.season_id
-            left join view_info as vi on vi.episode_id = ep.episode_id
-            left join show_genre as shg on shg.show_id = sh.show_id
-            left join genre_master as gm on gm.genre_id = shg.genre_id
-        group by
-            sh.show_title,
-            sh.show_id,
-            shg.genre_id,
-            gm.genre_name
-    ) show_title_avg on show_title_avg.genre_id = show_title_max.genre_id
-    and show_title_avg.avg_view_cnt = show_title_max.max_view_cnt
-order by
-    show_title_avg.genre_id;
+                    sh.show_title
+            ) show_view_info
+    ) show_view_info on show_view_info.show_id = sh.show_id
+    and genre_view_info.max_genre_view_cnt = show_view_info.avg_show_view_cnt
