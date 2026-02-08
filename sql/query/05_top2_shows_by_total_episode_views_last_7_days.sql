@@ -5,12 +5,11 @@ from
     show_master as sh
     left join season_master as se on se.show_id = sh.show_id
     left join episode_master as ep on ep.season_id = se.season_id
-    left join time_ch as tc on ep.episode_id = tc.episode_id
-    left join time_master as tm on tm.time_id = tc.time_id
-    left join view_info as vi on vi.episode_id = ep.episode_id
+    left join broadcast as br on ep.episode_id = br.episode_id
+    left join view_info as vi on vi.broadcast_id = br.broadcast_id
 where
-    tm.broadcast_start >= curdate()
-    and tm.broadcast_start < date_add(curdate(), interval 7 day)
+    br.broadcast_start >= curdate()
+    and br.broadcast_start < date_add(curdate(), interval 7 day)
 group by
     sh.show_id,
     sh.show_title

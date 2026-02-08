@@ -44,14 +44,8 @@ entity "エピソードマスタ" as episode_master{
 }
 
 ' ====================
-' 時間・チャンネル系
+' チャンネル系
 ' ====================
-entity "時間マスタ" as time_master {
-    + time_id : int
-    --
-    broadcast_start : datetime
-    broadcast_end   : datetime
-}
 
 entity "チャンネルマスタ" as ch_master {
     + ch_id : int
@@ -59,10 +53,16 @@ entity "チャンネルマスタ" as ch_master {
     ch_name : string
 }
 
-entity "時間チャンネル関連" as time_ch{
-    + time_id : int
-    + ch_id : int
+' ====================
+' 放送情報系
+' ====================
+
+entity "放送情報" as broadcast {
+    + broadcast_id : int
     --
+    broadcast_start : datetime
+    broadcast_end   : datetime
+    ch_id : int
     episode_id : int
 }
 
@@ -72,8 +72,9 @@ entity "時間チャンネル関連" as time_ch{
 entity "視聴情報" as view_info {
    + view_id : int
    --
-   episode_id : int
+   broadcast_id : int
    view_cnt : int
+   
 }
 
 ' ====================
@@ -82,11 +83,10 @@ entity "視聴情報" as view_info {
 show_master   ||--|{ season_master
 season_master||--|{ episode_master
 
-episode_master ||--o{ time_ch
-time_master }|--o{ time_ch
-ch_master ||--o{ time_ch
+episode_master ||--o{ broadcast
+ch_master ||--o{ broadcast
 
-episode_master ||--|{ view_info
+broadcast ||--|| view_info
 
 show_master ||--|{ show_genre
 genre_master ||--o{ show_genre
