@@ -46,5 +46,5 @@ TERM2/
 │  ├ dml/    # 初期データ投入（INSERT）
 │  └ query/  # 課題
 ├ scripts/   # PowerShell実行スクリプト
-├ doc/       # ER図・設計メモ
+├ doc/       # ER図・テーブル定義書
 └ README.md
