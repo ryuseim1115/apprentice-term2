@@ -1,5 +1,5 @@
 insert into
-    broadcast (broadcast_start, broadcast_end, ch_id, episode_id)
+    broadcast (broadcast_start, broadcast_end, channel_id, episode_id)
 values
     ('2024/6/1 0:00','2024/6/1 1:56',15,1),
 ('2024/10/1 0:00','2024/10/1 0:18',14,5766),

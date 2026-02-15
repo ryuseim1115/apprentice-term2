@@ -1,5 +1,5 @@
 insert into
-    ch_master (ch_name)
+    channel (channel_name)
 values
     ('ドラマ1'),
     ('ドラマ2'),

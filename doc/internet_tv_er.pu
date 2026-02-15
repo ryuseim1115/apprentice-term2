@@ -4,35 +4,35 @@ title インターネットTV
 ' ====================
 ' 番組・ジャンル系
 ' ====================
-entity "番組マスタ" as show_master {
-    + show_id : int
+entity "番組" as program {
+    + program_id : int
     --
-    show_title : string
-    show_detail : string  
+    program_title : string
+    program_detail : string  
 }
 
-entity "ジャンルマスタ" as genre_master{
+entity "ジャンル" as genre{
     + genre_id : int
     --
     genre_name : string
 }
 
-entity "番組ジャンル関連" as show_genre {
-    + show_id : int
+entity "番組ジャンル関連" as program_genre {
+    + program_id : int
     + genre_id : int
 }
 
 ' ====================
 ' シーズン・エピソード系
 ' ====================
-entity "シーズンマスタ" as season_master {
+entity "シーズン" as season {
     + season_id : int
     --
-    show_id : int
+    program_id : int
     season_no : int
 }
 
-entity "エピソードマスタ" as episode_master{
+entity "エピソード" as episode{
     + episode_id : int
     --
     season_id : int
@@ -47,10 +47,10 @@ entity "エピソードマスタ" as episode_master{
 ' チャンネル系
 ' ====================
 
-entity "チャンネルマスタ" as ch_master {
-    + ch_id : int
+entity "チャンネル" as channel {
+    + channel_id : int
     --
-    ch_name : string
+    channel_name : string
 }
 
 ' ====================
@@ -62,7 +62,7 @@ entity "放送情報" as broadcast {
     --
     broadcast_start : datetime
     broadcast_end   : datetime
-    ch_id : int
+    channel_id : int
     episode_id : int
 }
 
@@ -80,15 +80,15 @@ entity "視聴情報" as view_info {
 ' ====================
 ' リレーション
 ' ====================
-show_master   ||--|{ season_master
-season_master||--|{ episode_master
+program   ||--|{ season
+season||--|{ episode
 
-episode_master ||--o{ broadcast
-ch_master ||--o{ broadcast
+episode ||--o{ broadcast
+channel ||--o{ broadcast
 
 broadcast ||--|| view_info
 
-show_master ||--|{ show_genre
-genre_master ||--o{ show_genre
+program ||--|{ program_genre
+genre ||--o{ program_genre
 
 @enduml
