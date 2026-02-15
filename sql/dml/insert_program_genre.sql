@@ -1,5 +1,5 @@
 insert into
-    show_genre (show_id, genre_id)
+    program_genre (program_id, genre_id)
 values
     (1, 4),
     (2, 4),

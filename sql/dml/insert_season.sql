@@ -1,5 +1,5 @@
 insert into
-    season_master (show_id, season_no)
+    season (program_id, season_no)
 values
     (1, 1),
     (1, 2),

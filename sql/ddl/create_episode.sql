@@ -1,5 +1,5 @@
 create table
-    episode_master (
+    episode (
         episode_id int auto_increment comment 'エピソードID',
         season_id int comment 'シーズンID',
         episode_no int not null comment 'エピソード番号',
@@ -8,5 +8,5 @@ create table
         episode_length int not null comment 'エピソード時間',
         episode_release_date datetime comment 'エピソード公開日',
         primary key (episode_id),
-        constraint fk_episode_master_season foreign key (season_id) references season_master (season_id) on delete cascade
-    ) comment = 'エピソードマスタ';
+        constraint fk_episode_season foreign key (season_id) references season (season_id) on delete cascade
+    ) comment = 'エピソード';

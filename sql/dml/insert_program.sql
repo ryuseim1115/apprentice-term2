@@ -1,5 +1,5 @@
 insert into
-    show_master (show_id, show_title, show_detail)
+    program (program_id, program_title, program_detail)
 values
     (
         1,

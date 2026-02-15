@@ -1,5 +1,5 @@
 insert into
-    genre_master (genre_name)
+    genre (genre_name)
 values
     ('ドラマ'),
     ('アニメ'),

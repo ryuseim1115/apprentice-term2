@@ -1,5 +1,5 @@
 insert into
-    episode_master (
+    episode (
         season_id,
         episode_no,
         episode_title,
