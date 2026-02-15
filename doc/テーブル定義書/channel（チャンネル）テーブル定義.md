@@ -2,5 +2,5 @@
 
 | # | 論理名       | 物理名   | 型           | PK | NOT NULL | FK | 備考           |
 |---:|--------------|----------|--------------|:--:|:--------:|:--:|----------------|
-| 1 | チャンネルID | ch_id    | int          | ○  | ○        |    | auto_increment |
-| 2 | チャンネル名 | ch_name  | VARCHAR(100) |    | ○        |    |                |
+| 1 | チャンネルID | channel_id    | int          | ○  | ○        |    | auto_increment |
+| 2 | チャンネル名 | channel_name  | VARCHAR(100) |    | ○        |    |                |
